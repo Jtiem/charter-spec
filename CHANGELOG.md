@@ -16,7 +16,7 @@ The first public draft of the Charter spec.
 - [COMPARISON.md](COMPARISON.md) — Charter vs `DESIGN.md`, `tokens.json`, Style Dictionary, Tailwind config, Figma Variables, Markdown style guides
 - [EVIDENCE.md](EVIDENCE.md) — what's measured, what's preliminary, what's external
 - [MEASUREMENT-PLAN.md](MEASUREMENT-PLAN.md) — experiments to run before `v1.0.0` final
-- [schema/charter.schema.json](schema/charter.schema.json) — JSON Schema (draft 2020-12)
+- [v1/charter.schema.json](v1/charter.schema.json) — JSON Schema (draft 2020-12)
 - [examples/charter.minimal.yaml](examples/charter.minimal.yaml) — smallest valid Charter
 - [examples/charter.complete.yaml](examples/charter.complete.yaml) — fully populated Charter (Citrine)
 - [examples/charter.from-design-md.yaml](examples/charter.from-design-md.yaml) — converter output sample (Northwind)

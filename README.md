@@ -80,18 +80,18 @@ Run it through [`converters/design-md-to-charter/`](converters/design-md-to-char
 Charter's `tokens` section is DTCG. Wrap your existing token file in a Charter envelope (`$schema`, `name`, `version`, `tokens`, `rules`) and you're done. The DTCG `$value` / `$type` fields pass through unchanged.
 
 **You have neither.**
-Copy [`examples/charter.minimal.yaml`](examples/charter.minimal.yaml). Replace the tokens with three of your real colors. Save it as `CHARTER.yaml` at your project root. Validate with any JSON Schema validator pointed at [`schema/charter.schema.json`](schema/charter.schema.json). Iterate.
+Copy [`examples/charter.minimal.yaml`](examples/charter.minimal.yaml). Replace the tokens with three of your real colors. Save it as `CHARTER.yaml` at your project root. Validate with any JSON Schema validator pointed at [`v1/charter.schema.json`](v1/charter.schema.json). Iterate.
 
 ## Validation
 
-Charter ships a JSON Schema (draft 2020-12) at [`schema/charter.schema.json`](schema/charter.schema.json). Any standards-compliant validator works:
+Charter ships a JSON Schema (draft 2020-12) at [`v1/charter.schema.json`](v1/charter.schema.json). Any standards-compliant validator works:
 
 ```bash
 # Node (ajv)
-npx ajv validate -s schema/charter.schema.json -d CHARTER.yaml --spec=draft2020
+npx ajv validate -s v1/charter.schema.json -d CHARTER.yaml --spec=draft2020
 
 # Python (jsonschema)
-check-jsonschema --schemafile schema/charter.schema.json CHARTER.yaml
+check-jsonschema --schemafile v1/charter.schema.json CHARTER.yaml
 
 # IDE
 # Most editors auto-fetch the $schema URL and validate on save.

@@ -210,7 +210,7 @@ Tooling **MUST NOT** parse `notes` content as rules. It is for humans.
 
 A Charter is valid if it:
 
-1. Conforms to the JSON Schema at [`schema/charter.schema.json`](schema/charter.schema.json) referenced by `$schema`
+1. Conforms to the JSON Schema at [`v1/charter.schema.json`](v1/charter.schema.json) referenced by `$schema`
 2. Does not declare a duplicate token path
 3. Does not declare a duplicate profile name
 4. Has every internal token reference resolving to an existing token

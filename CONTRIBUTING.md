@@ -23,7 +23,7 @@ Spec changes are scoped to minor versions when additive (new optional fields, ne
 1. Open an issue first for anything non-trivial. A 30-line PR is welcome without prior discussion; a spec change is not.
 2. Reference the section of [CHARTER.md](CHARTER.md), [EVIDENCE.md](EVIDENCE.md), or [PHILOSOPHY.md](PHILOSOPHY.md) you're modifying.
 3. For default changes: include the measurement data or a citation to where it lives.
-4. Run `npx ajv validate -s schema/charter.schema.json -d examples/*.yaml --spec=draft2020` before submitting — all examples must validate against any proposed schema change.
+4. Run `npx ajv validate -s v1/charter.schema.json -d examples/*.yaml --spec=draft2020` before submitting — all examples must validate against any proposed schema change.
 
 ## Code of conduct
 

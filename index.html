@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Charter — a portable, AI-readable, machine-validatable design system contract</title>
+  <meta name="description" content="A DESIGN.md you can fail the build on. Open-source spec for enforcing design system constraints on AI-generated UI." />
+  <meta property="og:title" content="Charter" />
+  <meta property="og:description" content="A portable, AI-readable, machine-validatable design system contract. A DESIGN.md you can fail the build on." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://usecharter.dev/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e1116;
+      --bg-alt: #161b22;
+      --fg: #e6edf3;
+      --fg-muted: #8b949e;
+      --accent: #f59e0b;
+      --rule: #21262d;
+      --code-bg: #0a0d12;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --bg-alt: #f6f8fa;
+        --fg: #1f2328;
+        --fg-muted: #59636e;
+        --accent: #b45309;
+        --rule: #d1d9e0;
+        --code-bg: #f6f8fa;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 720px; margin: 0 auto; padding: 80px 24px 120px; }
+    header { margin-bottom: 64px; }
+    .brand {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .tagline {
+      color: var(--fg-muted);
+      font-size: 18px;
+      margin: 0 0 24px;
+    }
+    .oneliner {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin: 32px 0 0;
+    }
+    .oneliner code {
+      background: var(--bg-alt);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--accent);
+    }
+    section { margin-bottom: 48px; }
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+    p { margin: 0 0 16px; }
+    p:last-child { margin-bottom: 0; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13.5px;
+      line-height: 1.6;
+      margin: 0 0 24px;
+    }
+    code { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+    p code, li code {
+      background: var(--bg-alt);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+    a:hover { border-bottom-color: var(--accent); }
+    .links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin: 32px 0 0;
+      font-size: 15px;
+    }
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      color: var(--fg);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .links a:hover {
+      background: var(--bg-alt);
+      border-color: var(--fg-muted);
+      border-bottom-color: var(--fg-muted);
+    }
+    .links a.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+    .links a.primary:hover { opacity: 0.9; }
+    ul { padding-left: 22px; margin: 0 0 16px; }
+    li { margin-bottom: 6px; }
+    .muted { color: var(--fg-muted); }
+    .status {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: var(--bg-alt);
+      color: var(--fg-muted);
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+    footer {
+      margin-top: 80px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+      color: var(--fg-muted);
+      font-size: 13px;
+    }
+    footer a { color: var(--fg-muted); }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1 class="brand">Charter <span class="status">v1.0.0-draft</span></h1>
+    <p class="tagline">A portable, AI-readable, machine-validatable design system contract.</p>
+    <p class="oneliner">In one line: a <code>DESIGN.md</code> you can fail the build on.</p>
+  </header>
+
+  <section>
+    <p>AI agents are good at writing code that <em>looks</em> right. They are reliably bad at writing code that <em>is</em> right — that uses the design system's tokens, respects the design system's components, and behaves the way the design system was meant to behave.</p>
+    <p>A Charter is a single file at the root of your project that declares what your design system permits — in a form a model can read at generation time <em>and</em> a linter can refuse at audit time.</p>
+  </section>
+
+  <section>
+    <h2>Quick look</h2>
+<pre><code># CHARTER.yaml
+$schema: https://usecharter.dev/v1/charter.schema.json
+name: Hello
+version: 0.1.0
+
+tokens:
+  color:
+    primary: { $value: "#0066ff", $type: color }
+    surface: { $value: "#ffffff", $type: color }
+    text:    { $value: "#1f2937", $type: color }
+
+components:
+  registry: "@hello/ui"
+  allowed: [Button]
+
+rules:
+  hardcoded_colors: error</code></pre>
+    <p>That is a Charter. A linter pointed at this file will reject any generated code that uses a color outside the three declared tokens. The design system is no longer a suggestion.</p>
+  </section>
+
+  <section>
+    <h2>What you get</h2>
+    <ul>
+      <li><strong>Tokens</strong> in <a href="https://www.designtokens.org/tr/drafts/">W3C DTCG</a> format — interoperable with Style Dictionary, Figma Variables, and DESIGN.md</li>
+      <li><strong>Component allowlists</strong> — declare what UI may compose with</li>
+      <li><strong>Rules</strong> with graduated severity (<code>error</code> / <code>warn</code> / <code>off</code>)</li>
+      <li><strong>Profiles</strong> — different rules for prototype vs production</li>
+      <li><strong>Notes</strong> — free-text rationale, preserved across tools</li>
+      <li><strong>A JSON Schema</strong> any standards-compliant validator can use</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Why it exists</h2>
+    <p>A "falsifiable spec" — one specific enough that an automated check can refuse output that violates it — produces measurably better AI output. But every line in a good falsifiable spec ("no <code>scale-105</code>", "do NOT hand-roll <code>&lt;div className=&quot;rounded-lg border…&quot;&gt;</code>") comes from a scar the writer has already earned. A PM or designer writing their first AI spec has none of those scars. They cannot write that spec.</p>
+    <p>That's a tooling failure dressed as a discipline problem. A Charter shifts the cost of precision from "scars accumulated by hand" to "tool installed once."</p>
+  </section>
+
+  <section>
+    <h2>What's measured, what isn't</h2>
+    <p>Rule defaults in the spec are tagged <code>[supported]</code> (backed by measurement) or <code>[preliminary]</code> (educated guess, measurement pending). The most consequential structural claim — that constraining AI to a component allowlist reduces drift — is backed by a <a href="https://github.com/Jtiem/charter-spec/blob/main/EVIDENCE.md">five-test validation arc</a> with 36+ blind-scored builds. Specific numeric thresholds (like <code>delta_e_threshold: 2.0</code>) are preliminary and tracked in a <a href="https://github.com/Jtiem/charter-spec/blob/main/MEASUREMENT-PLAN.md">public measurement plan</a> for closing before v1.0.0 final.</p>
+    <p>Reviewers are invited to challenge any of it.</p>
+  </section>
+
+  <section>
+    <h2>Get started</h2>
+    <div class="links">
+      <a class="primary" href="https://github.com/Jtiem/charter-spec">View on GitHub →</a>
+      <a href="https://github.com/Jtiem/charter-spec/blob/main/CHARTER.md">Read the spec</a>
+      <a href="https://github.com/Jtiem/charter-spec/blob/main/README.md">Adoption guide</a>
+      <a href="/v1/charter.schema.json">JSON Schema</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Apache 2.0. Reference implementation: <a href="https://github.com/Jtiem/Lunar-Elevator-Bridge">Flint</a>. The spec is the contract; the implementation is the market.</p>
+  </footer>
+</main>
+</body>
+</html>

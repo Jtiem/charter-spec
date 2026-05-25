@@ -25,7 +25,7 @@ A `DESIGN.md` file conforming to Google's open-source DESIGN.md spec ([blog.goog
 
 ## 2. Output
 
-A Charter conforming to [`schema/charter.schema.json`](../../schema/charter.schema.json), with the following sections populated:
+A Charter conforming to [`v1/charter.schema.json`](../../v1/charter.schema.json), with the following sections populated:
 
 - `$schema` — set to `https://usecharter.dev/v1/charter.schema.json`
 - `name` — extracted from the DESIGN.md's frontmatter (`name:` field) or its top-level heading. If neither is found, the converter MUST emit a warning and use the input file's basename.
@@ -117,7 +117,7 @@ This ensures no DESIGN.md content is silently dropped.
 
 ## 8. Validation
 
-The converter MUST validate its output against [`schema/charter.schema.json`](../../schema/charter.schema.json) before writing. If the output does not validate, the converter MUST report the schema error and refuse to write a corrupt Charter.
+The converter MUST validate its output against [`v1/charter.schema.json`](../../v1/charter.schema.json) before writing. If the output does not validate, the converter MUST report the schema error and refuse to write a corrupt Charter.
 
 ## 9. Warning and error semantics
 
