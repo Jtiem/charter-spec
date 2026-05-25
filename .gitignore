@@ -10,3 +10,20 @@ dist/
 .claude-flow/
 .claude/
 
+# Astro Starlight site (see site/README.md)
+site/node_modules/
+site/dist/
+site/.astro/
+# Generated content — see site/scripts/sync-content.mjs.
+# These are derived from the canonical root markdown at build time.
+site/src/content/docs/spec.md
+site/src/content/docs/evidence.md
+site/src/content/docs/measurement-plan.md
+site/src/content/docs/philosophy.md
+site/src/content/docs/comparison.md
+site/src/content/docs/changelog.md
+site/src/content/docs/contributing.md
+site/src/content/docs/converters/index.md
+site/src/content/docs/converters/design-md.md
+site/src/content/docs/converters/design-md-spec.md
+
