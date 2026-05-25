@@ -1,0 +1,22 @@
+# The smallest valid Charter.
+# Three tokens, one component, sensible default rules.
+# Copy this file as CHARTER.yaml at your project root and iterate.
+# A real-world Charter is closer in shape to charter.complete.yaml.
+
+$schema: https://usecharter.dev/v1/charter.schema.json
+name: Hello
+version: 0.1.0
+
+tokens:
+  color:
+    primary: { $value: "#0066ff", $type: color }
+    surface: { $value: "#ffffff", $type: color }
+    text:    { $value: "#1f2937", $type: color }
+
+components:
+  registry: "@hello/ui"
+  allowed:
+    - Button
+
+rules:
+  hardcoded_colors: error

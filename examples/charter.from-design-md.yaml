@@ -1,0 +1,105 @@
+# Output of running the DESIGN.md → Charter converter on a typical DESIGN.md.
+# Source DESIGN.md was for a fictional "Northwind" design system with 9 sections.
+#
+# Notable conversion behavior:
+#   - Token blocks (already DTCG) flow through unchanged into `tokens`.
+#   - Prose sections (Visual Theme & Atmosphere, Typography Rules, etc.)
+#     are preserved verbatim under `notes`, keyed by their section name.
+#   - The converter emits a `rules:` block populated with the spec defaults,
+#     because DESIGN.md does not declare per-rule severities. The author is
+#     expected to review and tighten these for production.
+#   - The converter cannot infer `components.allowed` from a DESIGN.md (which
+#     has no formal component allowlist concept); it emits an empty list
+#     with a comment prompting the author to fill it in.
+
+$schema: https://usecharter.dev/v1/charter.schema.json
+name: Northwind
+version: 0.1.0
+
+tokens:
+  color:
+    primary:   { $value: "#1d4ed8", $type: color }
+    secondary: { $value: "#7c3aed", $type: color }
+    surface:   { $value: "#ffffff", $type: color }
+    text:      { $value: "#0f172a", $type: color }
+    muted:     { $value: "#64748b", $type: color }
+
+  spacing:
+    "1": { $value: "4px",  $type: dimension }
+    "2": { $value: "8px",  $type: dimension }
+    "4": { $value: "16px", $type: dimension }
+    "8": { $value: "32px", $type: dimension }
+
+  typography:
+    body:
+      $value:
+        fontFamily: "Source Sans Pro"
+        fontSize: "16px"
+        lineHeight: "1.5"
+      $type: typography
+
+components:
+  # The DESIGN.md → Charter converter cannot infer this list from prose.
+  # Add the components your design system permits. Until this is populated,
+  # the unknown_components rule will not fire (no allowlist to compare against).
+  registry: ""
+  allowed: []
+
+rules:
+  # Defaults emitted by the converter. Review and tighten before shipping
+  # to production. See CHARTER.md §5.2 for what each rule does.
+  delta_e_threshold: 2.0
+  wcag_level: AA
+  hardcoded_colors: error
+  hardcoded_spacing: warn
+  hardcoded_typography: warn
+  off_token_typography: error
+  unknown_components: error
+  forbidden_components: error
+  inline_styles: warn
+  accessibility: error
+
+notes:
+  # Prose sections preserved verbatim from the source DESIGN.md.
+  # Section keys correspond to DESIGN.md's 9 predefined sections.
+
+  visual_theme_and_atmosphere: |
+    Northwind feels professional and trustworthy. The brand leans blue
+    with violet accents for emphasis. White space is generous; the
+    interface should feel uncrowded.
+
+  color_palette_and_roles: |
+    Primary blue (#1d4ed8) is used for primary actions and key brand
+    moments. Secondary violet (#7c3aed) is for emphasis only — do not
+    use it for primary actions or backgrounds. Neutral text colors are
+    cool-leaning to harmonize with the primary.
+
+  typography_rules: |
+    Source Sans Pro for all text. Body copy is 16px; headings step up
+    in 4px increments. Avoid bold body copy — emphasis goes through
+    color or layout.
+
+  spacing_and_layout: |
+    A 4px base unit. Components compose on a 4/8/16/32 ladder. Inline
+    elements use 4px gaps; block elements use 16px or larger.
+
+  interaction_and_motion: |
+    Transitions are 150ms for hovers, 300ms for state changes. Motion
+    should feel functional, not decorative.
+
+  imagery_and_iconography: |
+    Lucide icons at 16px or 24px. Photography is editorial — never
+    stock business photos. Illustrations are line-based with brand colors.
+
+  accessibility_requirements: |
+    WCAG 2.1 AA at minimum. All interactive elements must be keyboard-
+    accessible. All non-text content has an accessible name.
+
+  brand_voice_and_tone: |
+    Confident and direct. Avoid filler ("just", "simply"). Microcopy
+    uses sentence case. Error messages state the problem and the fix.
+
+  governance_and_change: |
+    Token changes require approval from the design lead and the
+    engineering lead. Component additions require a design review and
+    an accessibility audit.

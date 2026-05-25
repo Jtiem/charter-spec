@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+
+# Local validation artifacts (committed copies live in tests/)
+.charter-validate-out/
+
+# Tooling state from local agent runs (not part of the spec)
+.claude-flow/
+.claude/
+

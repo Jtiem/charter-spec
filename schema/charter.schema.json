@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://usecharter.dev/v1/charter.schema.json",
+  "title": "Charter v1",
+  "description": "A portable, AI-readable, machine-validatable design system contract. See CHARTER.md for the normative specification.",
+  "type": "object",
+  "required": ["$schema", "name", "version"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "URI of the Charter schema this document targets. Tooling MUST dispatch on this value to determine which spec version applies."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable identifier for the design system."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[\\w.]+)?(\\+[\\w.]+)?$",
+      "description": "Version of the design system, in SemVer 2.0.0 form. This is the version of the content, not the version of the spec (which is implied by $schema)."
+    },
+    "tokens": {
+      "$ref": "#/$defs/tokenGroup",
+      "description": "Design tokens in W3C DTCG format. Groups may nest arbitrarily."
+    },
+    "components": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "Package, path, or URL where the design system's components live."
+        },
+        "allowed": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Component names permitted in produced UI. May include glob patterns."
+        },
+        "forbidden": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Component names or intrinsic elements that MUST NOT be used. Cannot be downgraded by severity."
+        }
+      }
+    },
+    "rules": {
+      "$ref": "#/$defs/rulesBlock",
+      "description": "Enforcement policy. Each rule has a default; see CHARTER.md §5.2."
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "rules": { "$ref": "#/$defs/rulesBlock" }
+        }
+      },
+      "description": "Named rule overlays. The profile's rules block shallow-merges over the top-level rules block when selected.",
+      "not": {
+        "anyOf": [
+          { "required": ["default"] },
+          { "required": ["base"] }
+        ]
+      }
+    },
+    "notes": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Free-form human rationale. Preserved by all Charter tooling. MUST NOT be parsed as rules."
+    }
+  },
+  "$defs": {
+    "tokenGroup": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          { "$ref": "#/$defs/token" },
+          { "$ref": "#/$defs/tokenGroup" }
+        ]
+      }
+    },
+    "token": {
+      "type": "object",
+      "required": ["$value", "$type"],
+      "properties": {
+        "$value": {
+          "description": "Token value. May be a primitive, a composite object (e.g., typography), or a DTCG reference like {color.primary}."
+        },
+        "$type": {
+          "type": "string",
+          "description": "DTCG type. Conventional types include color, dimension, fontFamily, fontWeight, duration, cubicBezier, shadow, typography, gradient, border."
+        },
+        "$description": {
+          "type": "string",
+          "description": "Optional per-token rationale."
+        }
+      },
+      "additionalProperties": true
+    },
+    "severity": {
+      "enum": ["error", "warn", "off"]
+    },
+    "wcagLevel": {
+      "enum": ["A", "AA", "AAA"]
+    },
+    "rulesBlock": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "delta_e_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Maximum CIEDE2000 perceptual color distance from the nearest token color."
+        },
+        "wcag_level": {
+          "$ref": "#/$defs/wcagLevel",
+          "description": "WCAG conformance level required."
+        },
+        "hardcoded_colors": { "$ref": "#/$defs/severity" },
+        "hardcoded_spacing": { "$ref": "#/$defs/severity" },
+        "hardcoded_typography": { "$ref": "#/$defs/severity" },
+        "off_token_typography": { "$ref": "#/$defs/severity" },
+        "unknown_components": { "$ref": "#/$defs/severity" },
+        "forbidden_components": { "$ref": "#/$defs/severity" },
+        "inline_styles": { "$ref": "#/$defs/severity" },
+        "accessibility": { "$ref": "#/$defs/severity" }
+      }
+    }
+  }
+}
